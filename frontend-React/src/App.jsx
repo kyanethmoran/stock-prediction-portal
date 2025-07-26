@@ -1,5 +1,11 @@
+import "./assets/css/style.css";
+
 function App() {
-  return <>Stock</>;
+  return (
+    <>
+      <h2>stocks</h2>
+    </>
+  );
 }
 
 export default App;
