@@ -16,6 +16,7 @@ const Main = () => {
                 predict market movements, and give you the edge in real-time
                 decision making.
               </p>
+              {/* come back to this for routing */}
               <a
                 href="/signup"
                 className="btn btn-info btn-lg mt-3 text-white shadow"
