@@ -55,6 +55,14 @@ const Footer = () => {
           <strong> Bootstrap 5</strong>, <strong>Django</strong>, and
           <strong> TensorFlow</strong>.
         </p>
+        {/* Disclaimer */}
+        <p className="text-center text-warning small mt-2 px-3">
+          <strong>Disclaimer:</strong> This website is a portfolio project
+          created for demonstration purposes only. It is not a real product and
+          should <u>not</u> be used to make actual trading or investment
+          decisions. No data, predictions, or insights provided here are
+          financial advice.
+        </p>
       </div>
     </footer>
   );
