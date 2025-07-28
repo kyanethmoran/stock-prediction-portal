@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -11,6 +10,7 @@ const SignUp = () => {
     confirmPassword: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState([]); // array of error strings
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,13 +18,23 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setSubmitted(true);
 
-    if (formData.password !== formData.confirmPassword) {
-      return; // Stop here if passwords don't match
+    const errors = [];
+
+    // Frontend validations
+    if (formData.password.length < 4) {
+      errors.push("Password must be at least 4 characters.");
     }
-    console.log("formData: ", formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      errors.push("Passwords do not match.");
+    }
+
+    if (errors.length > 0) {
+      setErrorMessage(errors);
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -32,11 +42,24 @@ const SignUp = () => {
         formData
       );
       console.log("response.data: ", response?.data);
-      console.log("signup successfull");
+      console.log("Signup successful");
+      setErrorMessage([]); // clear any previous errors
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
+
+      const backendErrors = [];
+      const data = error?.response?.data;
+
+      if (data?.username) backendErrors.push(`Username: ${data.username[0]}`);
+      if (data?.email) backendErrors.push(`Email: ${data.email[0]}`);
+      if (data?.password) backendErrors.push(`Password: ${data.password[0]}`);
+      if (!data || backendErrors.length === 0)
+        backendErrors.push("An unexpected error occurred.");
+
+      setErrorMessage(backendErrors);
     }
   };
+
   return (
     <>
       <div
@@ -57,6 +80,17 @@ const SignUp = () => {
                 <h3 className="text-center mb-4 text-primary">
                   Create Account
                 </h3>
+
+                {errorMessage.length > 0 && (
+                  <div className="alert alert-danger small">
+                    <ul className="mb-0 ps-3">
+                      {errorMessage.map((msg, idx) => (
+                        <li key={idx}>{msg}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label text-muted">Username:</label>
@@ -103,12 +137,6 @@ const SignUp = () => {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                     />
-                    {submitted &&
-                      formData.password !== formData.confirmPassword && (
-                        <div className="text-danger small mt-1 mb-3">
-                          Passwords do not match
-                        </div>
-                      )}
                   </div>
                   <button type="submit" className="btn btn-info w-100">
                     Sign Up
