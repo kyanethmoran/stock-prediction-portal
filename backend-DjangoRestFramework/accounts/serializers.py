@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -7,6 +8,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+        # default user models will not validate emails for uniqueness 
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("A user with this email address already exists.")
+        return value
 
     def create(self, validated_data):
 
