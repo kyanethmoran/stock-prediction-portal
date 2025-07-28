@@ -45,6 +45,12 @@ const SignUp = () => {
       console.log("Signup successful");
       setErrorMessage([]); // clear any previous errors
       setSubmitted(false);
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
 
