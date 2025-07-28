@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    confirmPassword: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
@@ -15,7 +16,7 @@ const SignUp = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setSubmitted(true);
@@ -23,9 +24,18 @@ const SignUp = () => {
     if (formData.password !== formData.confirmPassword) {
       return; // Stop here if passwords don't match
     }
+    console.log("formData: ", formData);
 
-    console.log("Signup Data:", formData);
-    // replace this with an actual POST request to backend
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/register/",
+        formData
+      );
+      console.log("response.data: ", response?.data);
+      console.log("signup successfull");
+    } catch (error) {
+      console.error("signup error: ", error?.response?.data || error.message);
+    }
   };
   return (
     <>
@@ -39,11 +49,11 @@ const SignUp = () => {
       >
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-5">
-            <card
+            <div
               className="card shadow-lg rounded-4 border-0"
               style={{ backgroundColor: "#f4f4f4" }}
             >
-              <nestedcard className="card-body p-4">
+              <div className="card-body p-4">
                 <h3 className="text-center mb-4 text-primary">
                   Create Account
                 </h3>
@@ -107,8 +117,8 @@ const SignUp = () => {
                 <p className="text-center mt-3 text-muted">
                   Already have an account? <Link to="/login">Login here</Link>
                 </p>
-              </nestedcard>
-            </card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
