@@ -105,7 +105,7 @@ const Login = () => {
                   </button>
                 </form>
                 <p className="text-center mt-3 text-muted">
-                  Don’t have an account?{" "}
+                  Don’t have an account?
                   <Link to="/signup" className="text-info">
                     Sign up here
                   </Link>
