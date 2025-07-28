@@ -39,11 +39,11 @@ const SignUp = () => {
       >
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-5">
-            <div
+            <card
               className="card shadow-lg rounded-4 border-0"
               style={{ backgroundColor: "#f4f4f4" }}
             >
-              <div className="card-body p-4">
+              <nestedcard className="card-body p-4">
                 <h3 className="text-center mb-4 text-primary">
                   Create Account
                 </h3>
@@ -107,8 +107,8 @@ const SignUp = () => {
                 <p className="text-center mt-3 text-muted">
                   Already have an account? <Link to="/login">Login here</Link>
                 </p>
-              </div>
-            </div>
+              </nestedcard>
+            </card>
           </div>
         </div>
       </div>
