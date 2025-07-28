@@ -11,6 +11,7 @@ const SignUp = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]); // array of error strings
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -27,10 +28,12 @@ const SignUp = () => {
     // Frontend validations
     if (formData.password.length < 4) {
       errors.push("Password must be at least 4 characters.");
+      setLoading(false);
     }
 
     if (formData.password !== formData.confirmPassword) {
       errors.push("Passwords do not match.");
+      setLoading(false);
     }
 
     if (errors.length > 0) {
@@ -53,6 +56,7 @@ const SignUp = () => {
         password: "",
         confirmPassword: "",
       });
+      setSuccess(true);
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
 
@@ -73,104 +77,140 @@ const SignUp = () => {
 
   return (
     <>
-      <div
-        className="container my-5"
-        style={{
-          backgroundColor: "#f8f9fa",
-          padding: "2rem",
-          borderRadius: "1rem",
-        }}
-      >
-        <div className="row justify-content-center">
-          <div className="col-md-6 col-lg-5">
-            <div
-              className="card shadow-lg rounded-4 border-0"
-              style={{ backgroundColor: "#f4f4f4" }}
-            >
-              <div className="card-body p-4">
-                <h3 className="text-center mb-4 text-primary">
-                  Create Account
-                </h3>
-
-                {submitted && errorMessage.length > 0 && (
-                  <div className="alert alert-danger small">
-                    <ul className="mb-0 ps-3">
-                      {errorMessage.map((msg, idx) => (
-                        <li key={idx}>{msg}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label className="form-label text-muted">Username:</label>
-                    <input
-                      type="text"
-                      name="username"
-                      className="form-control"
-                      required
-                      value={formData.username}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label text-muted">Email:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      className="form-control"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label text-muted">Password:</label>
-                    <input
-                      type="password"
-                      name="password"
-                      className="form-control"
-                      required
-                      value={formData.password}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label text-muted">
-                      Confirm Password
-                    </label>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      className="form-control"
-                      required
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {loading ? (
-                    <button
-                      type="submit"
-                      className="btn btn-info w-100"
-                      disabled
-                    >
-                      Please Wait...
-                    </button>
-                  ) : (
-                    <button type="submit" className="btn btn-info w-100">
-                      Sign Up
-                    </button>
-                  )}
-                </form>
-                <p className="text-center mt-3 text-muted">
-                  Already have an account? <Link to="/login">Login here</Link>
-                </p>
+      {success ? (
+        <div
+          className="container my-5"
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "2rem",
+            borderRadius: "1rem",
+          }}
+        >
+          <div className="row justify-content-center mt-4">
+            <div className="col-md-6 col-lg-5">
+              <div
+                className="card shadow-lg rounded-4 border-0"
+                style={{ backgroundColor: "#f4f4f4" }}
+              >
+                <div className="card-body p-4 text-center">
+                  <h4 className="text-muted mb-3">
+                    Account Created Successfully!
+                  </h4>
+                  <p className="text-muted mb-4">
+                    You can now log in to your account.
+                  </p>
+                  <Link to="/login" className="btn btn-info w-100 text-light">
+                    Go to Login
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div
+          className="container my-5"
+          style={{
+            backgroundColor: "#f8f9fa",
+            padding: "2rem",
+            borderRadius: "1rem",
+          }}
+        >
+          <div className="row justify-content-center">
+            <div className="col-md-6 col-lg-5">
+              <div
+                className="card shadow-lg rounded-4 border-0"
+                style={{ backgroundColor: "#f4f4f4" }}
+              >
+                <div className="card-body p-4">
+                  <h3 className="text-center mb-4 text-info">Create Account</h3>
+
+                  {submitted && errorMessage.length > 0 && (
+                    <div className="alert alert-info small">
+                      <ul className="mb-0 ps-3">
+                        {errorMessage.map((msg, idx) => (
+                          <li key={idx}>{msg}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      <label className="form-label text-muted">Username:</label>
+                      <input
+                        type="text"
+                        name="username"
+                        className="form-control"
+                        required
+                        value={formData.username}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-muted">Email:</label>
+                      <input
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-muted">Password:</label>
+                      <input
+                        type="password"
+                        name="password"
+                        className="form-control"
+                        required
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label className="form-label text-muted">
+                        Confirm Password
+                      </label>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        className="form-control"
+                        required
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {loading ? (
+                      <button
+                        type="submit"
+                        className="btn btn-info w-100"
+                        disabled
+                      >
+                        Please Wait...
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="btn btn-info w-100 text-light"
+                      >
+                        Sign Up
+                      </button>
+                    )}
+                  </form>
+                  <p className="text-center mt-3 text-muted">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-info">
+                      Login here
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
