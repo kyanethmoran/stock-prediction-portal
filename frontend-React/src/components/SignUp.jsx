@@ -149,9 +149,19 @@ const SignUp = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <button type="submit" className="btn btn-info w-100">
-                    Sign Up
-                  </button>
+                  {loading ? (
+                    <button
+                      type="submit"
+                      className="btn btn-info w-100"
+                      disabled
+                    >
+                      Please Wait...
+                    </button>
+                  ) : (
+                    <button type="submit" className="btn btn-info w-100">
+                      Sign Up
+                    </button>
+                  )}
                 </form>
                 <p className="text-center mt-3 text-muted">
                   Already have an account? <Link to="/login">Login here</Link>
