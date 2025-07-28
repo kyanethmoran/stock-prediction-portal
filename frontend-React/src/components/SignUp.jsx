@@ -11,6 +11,7 @@ const SignUp = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState([]); // array of error strings
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,6 +20,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
+    setLoading(true);
 
     const errors = [];
 
@@ -51,6 +53,7 @@ const SignUp = () => {
         password: "",
         confirmPassword: "",
       });
+      setLoading(false);
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
 
