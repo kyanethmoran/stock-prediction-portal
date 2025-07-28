@@ -53,8 +53,11 @@ const Login = () => {
       <div className="container my-5">
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-5">
-            <div className="card bg-light shadow-lg rounded-4 border-0">
-              <div className="card-body p-4">
+            <card
+              className="card bg-light shadow-lg rounded-4 border-0"
+              style={{ backgroundColor: "#f4f4f4" }}
+            >
+              <nestcard className="card-body p-4">
                 <h3 className="text-center mb-4 text-primary">Login</h3>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
@@ -92,8 +95,8 @@ const Login = () => {
                 <p className="text-center mt-3 text-muted">
                   Don’t have an account? <Link to="/signup">Sign up here</Link>
                 </p>
-              </div>
-            </div>
+              </nestcard>
+            </card>
           </div>
         </div>
       </div>
