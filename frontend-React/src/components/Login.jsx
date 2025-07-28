@@ -65,7 +65,7 @@ const Login = () => {
               style={{ backgroundColor: "#f4f4f4" }}
             >
               <nestcard className="card-body p-4">
-                <h3 className="text-center mb-4 text-primary">Login</h3>
+                <h3 className="text-center mb-4 text-info">Login</h3>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label text-muted">Username:</label>
@@ -97,12 +97,18 @@ const Login = () => {
                     </div>
                   )}
 
-                  <button type="submit" className="btn btn-info w-100">
+                  <button
+                    type="submit"
+                    className="btn btn-info w-100 text-light"
+                  >
                     Login
                   </button>
                 </form>
                 <p className="text-center mt-3 text-muted">
-                  Don’t have an account? <Link to="/signup">Sign up here</Link>
+                  Don’t have an account?{" "}
+                  <Link to="/signup" className="text-info">
+                    Sign up here
+                  </Link>
                 </p>
               </nestcard>
             </card>
