@@ -1,9 +1,12 @@
 import React from "react";
 import machineLearning from "../assets/images/machineLearning.jpg";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Main = () => {
   return (
     <>
+      <Header />
       <section className="bg-light py-5">
         <div className="container">
           <div className="row align-items-center">
@@ -44,6 +47,7 @@ const Main = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
