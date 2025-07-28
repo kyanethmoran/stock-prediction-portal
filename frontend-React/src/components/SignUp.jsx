@@ -53,7 +53,6 @@ const SignUp = () => {
         password: "",
         confirmPassword: "",
       });
-      setLoading(false);
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
 
@@ -67,6 +66,8 @@ const SignUp = () => {
         backendErrors.push("An unexpected error occurred.");
 
       setErrorMessage(backendErrors);
+    } finally {
+      setLoading(false);
     }
   };
 
