@@ -88,14 +88,14 @@ const SignUp = () => {
                     <input
                       type="password"
                       name="confirmPassword"
-                      className="form-control bg-body-secondary"
+                      className="form-control"
                       required
                       value={formData.confirmPassword}
                       onChange={handleChange}
                     />
                     {submitted &&
                       formData.password !== formData.confirmPassword && (
-                        <div className="text-danger small mt-1">
+                        <div className="text-danger small mt-1 mb-3">
                           Passwords do not match
                         </div>
                       )}

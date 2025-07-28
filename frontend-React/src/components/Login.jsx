@@ -50,11 +50,18 @@ const Login = () => {
 
   return (
     <>
-      <div className="container my-5">
+      <div
+        className="container my-5"
+        style={{
+          backgroundColor: "#f8f9fa",
+          padding: "2rem",
+          borderRadius: "1rem",
+        }}
+      >
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-5">
             <card
-              className="card bg-light shadow-lg rounded-4 border-0"
+              className="card shadow-lg rounded-4 border-0"
               style={{ backgroundColor: "#f4f4f4" }}
             >
               <nestcard className="card-body p-4">
@@ -65,7 +72,7 @@ const Login = () => {
                     <input
                       type="text"
                       name="username"
-                      className="form-control bg-body-secondary text-dark"
+                      className="form-control"
                       required
                       value={formData.username}
                       onChange={handleChange}
@@ -77,7 +84,7 @@ const Login = () => {
                     <input
                       type="password"
                       name="password"
-                      className="form-control bg-body-secondary text-dark"
+                      className="form-control"
                       required
                       value={formData.password}
                       onChange={handleChange}
@@ -85,7 +92,9 @@ const Login = () => {
                   </div>
 
                   {submitted && loginError && (
-                    <div className="text-danger small mb-3">{loginError}</div>
+                    <div className="text-danger small mt-1 mb-3">
+                      {loginError}
+                    </div>
                   )}
 
                   <button type="submit" className="btn btn-info w-100">
