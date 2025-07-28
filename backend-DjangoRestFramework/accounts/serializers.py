@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password']
 
-        # default user models will not validate emails for uniqueness 
+    # default user models will not validate emails for uniqueness 
     def validate_email(self, value):
         if User.objects.filter(email=value).exists():
             raise serializers.ValidationError("A user with this email address already exists.")
@@ -17,7 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        # this can be replaced with **validated_data since we have only required fields
+        # this can be replaced with **validated_data since we have only required fields in our form 
+        # and no optional fields
         # user = User.objects.create_user(
         #     validated_data['username'],
         #     validated_data['email'],
