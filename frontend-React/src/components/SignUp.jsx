@@ -44,6 +44,7 @@ const SignUp = () => {
       console.log("response.data: ", response?.data);
       console.log("Signup successful");
       setErrorMessage([]); // clear any previous errors
+      setSubmitted(false);
     } catch (error) {
       console.error("signup error: ", error?.response?.data || error.message);
 
@@ -81,7 +82,7 @@ const SignUp = () => {
                   Create Account
                 </h3>
 
-                {errorMessage.length > 0 && (
+                {submitted && errorMessage.length > 0 && (
                   <div className="alert alert-danger small">
                     <ul className="mb-0 ps-3">
                       {errorMessage.map((msg, idx) => (
