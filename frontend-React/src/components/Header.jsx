@@ -1,13 +1,14 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-dark py-3 shadow-sm">
       <div className="container d-flex justify-content-between align-items-center">
         {/* come back to this for routing */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="navbar-brand d-flex align-items-center text-light"
         >
           <img
@@ -18,17 +19,17 @@ const Header = () => {
             className="me-2 rounded-circle shadow"
           />
           <span className="fs-4 fw-bold text-info">Stock+</span>
-        </a>
+        </Link>
 
         <div>
           {/* come back to this for routing */}
-          <a href="/" className="btn btn-outline-light me-2 hover-shadow">
+          <Link to="/login" className="btn btn-outline-light me-2 hover-shadow">
             Login
-          </a>
+          </Link>
           {/* come back to this for routing */}
-          <a href="/" className="btn btn-info text-white">
+          <Link to="/signup" className="btn btn-info text-white">
             Sign Up
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
