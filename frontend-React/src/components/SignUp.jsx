@@ -75,7 +75,6 @@ const SignUp = () => {
       setErrorMessage(backendErrors);
     } finally {
       setLoading(false);
-      setSubmitted(false);
     }
   };
 
