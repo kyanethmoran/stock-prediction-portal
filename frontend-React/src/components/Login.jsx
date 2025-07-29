@@ -50,10 +50,15 @@ const Login = () => {
       const backendErrors = [];
       const data = error?.response?.data;
 
-      if (data?.username) backendErrors.push(`Username: ${data.username[0]}`);
-      if (data?.password) backendErrors.push(`Password: ${data.password[0]}`);
-      if (!data || backendErrors.length === 0)
-        backendErrors.push("An unexpected error occurred.");
+      if (data?.detail) {
+        if (data.detail.includes("No active account")) {
+          backendErrors.push("Invalid username or password.");
+        } else {
+          backendErrors.push(data.detail);
+        }
+      } else {
+        backendErrors.push("An unexpected error occured.");
+      }
 
       console.log(backendErrors);
       setErrorMsg(backendErrors);
