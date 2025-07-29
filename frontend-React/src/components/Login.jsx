@@ -3,6 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const Login = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -10,7 +13,9 @@ const Login = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [loginError, setLoginError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,33 +23,38 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitted(false);
+    setLoading(true);
+    setErrorMsg("");
+    setSuccess(false);
 
     try {
       const response = await axios.post(
-        "put backend-DjangoRestFramework here",
+        "http://127.0.0.1:8000/api/v1/token/",
         formData
       );
-
-      // ✅ Login successful — do something with the response
-      alert("Login successful!");
-      console.log("Token or User Info:", response.data);
-      // e.g., save token and redirect
-      // localStorage.setItem("token", response.data.token);
-      // navigate("/dashboard");
+      setErrorMsg([]);
+      setFormData({
+        username: "",
+        password: "",
+      });
+      setSuccess(true);
     } catch (error) {
-      if (error.response && error.response.data) {
-        const msg =
-          error.response.data.detail ||
-          error.response.data.error ||
-          "Login failed. Check your credentials.";
-        setLoginError(msg);
-      } else {
-        setLoginError("Server error. Please try again later.");
-        alert(
-          "Hey dev dont forget to come back to login.jsx to update the axios.post on line 25"
-        );
-      }
+      const backendErrors = [];
+      const data = error?.response?.data;
+
+      if (data?.username) backendErrors.push(`Username: ${data.username[0]}`);
+      if (data?.password) backendErrors.push(`Password: ${data.password[0]}`);
+      if (!data || backendErrors.length === 0)
+        backendErrors.push("An unexpected error occurred.");
+
+      console.log(data);
+
+      setErrorMsg(backendErrors);
+    } finally {
+      setLoading(false);
+      setSubmitted(false);
+      console.log(success);
     }
   };
 
@@ -60,11 +70,11 @@ const Login = () => {
       >
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-5">
-            <card
+            <div
               className="card shadow-lg rounded-4 border-0"
               style={{ backgroundColor: "#f4f4f4" }}
             >
-              <nestcard className="card-body p-4">
+              <div className="card-body p-4">
                 <h3 className="text-center mb-4 text-info">Login</h3>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
@@ -110,8 +120,8 @@ const Login = () => {
                     Sign up here
                   </Link>
                 </p>
-              </nestcard>
-            </card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
