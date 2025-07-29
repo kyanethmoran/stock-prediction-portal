@@ -110,12 +110,16 @@ const Login = () => {
                     </div>
                   )}
 
-                  <button
-                    type="submit"
-                    className="btn btn-info w-100 text-light"
-                  >
-                    Login
-                  </button>
+                  {loading ? (
+                    <button className="btn btn-info w-100" disabled>
+                      <FontAwesomeIcon icon={faSpinner} spin />
+                      Please Wait...
+                    </button>
+                  ) : (
+                    <button className="btn btn-info w-100 text-light">
+                      Login
+                    </button>
+                  )}
                 </form>
                 <p className="text-center mt-3 text-muted">
                   Don’t have an account?
