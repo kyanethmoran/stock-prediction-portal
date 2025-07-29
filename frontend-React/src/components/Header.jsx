@@ -1,11 +1,20 @@
 import React from "react";
 import logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import { useContext } from "react";
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { navigate } = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+
+    setIsLoggedIn(false);
+    navigate("/");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-dark py-3 shadow-sm">
@@ -26,9 +35,12 @@ const Header = () => {
         </Link>
 
         {isLoggedIn ? (
-          <Link to="/" className="btn btn-outline-light me-2 hover-shadow">
+          <button
+            className="btn btn-outline-light me-2 hover-shadow"
+            onClick={handleLogout}
+          >
             Logout
-          </Link>
+          </button>
         ) : (
           <div>
             <Link
