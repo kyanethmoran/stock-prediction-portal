@@ -1,7 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { AuthContext } from "../AuthProvider";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +18,7 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,6 +49,7 @@ const Login = () => {
       });
       setSuccess(true);
       // come back and route to the dashboard when it is ready
+      setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
       setSubmitted(true);
