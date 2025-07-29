@@ -46,6 +46,7 @@ const Login = () => {
       });
       setSuccess(true);
     } catch (error) {
+      setSubmitted(true);
       const backendErrors = [];
       const data = error?.response?.data;
 
@@ -54,10 +55,10 @@ const Login = () => {
       if (!data || backendErrors.length === 0)
         backendErrors.push("An unexpected error occurred.");
 
+      console.log(backendErrors);
       setErrorMsg(backendErrors);
     } finally {
       setLoading(false);
-      setSubmitted(false);
     }
   };
 
@@ -79,6 +80,17 @@ const Login = () => {
             >
               <div className="card-body p-4">
                 <h3 className="text-center mb-4 text-info">Login</h3>
+
+                {submitted && errorMsg.length > 0 && (
+                  <div className="alert alert-info small">
+                    <ul className="mb-0 ps-3">
+                      {errorMsg.map((msg, idx) => (
+                        <li key={idx}>{msg}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label text-muted">Username:</label>
@@ -103,12 +115,6 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </div>
-
-                  {submitted && loginError && (
-                    <div className="text-danger small mt-1 mb-3">
-                      {loginError}
-                    </div>
-                  )}
 
                   {loading ? (
                     <button className="btn btn-info w-100" disabled>
