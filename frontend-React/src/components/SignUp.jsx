@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -188,6 +191,7 @@ const SignUp = () => {
                         className="btn btn-info w-100"
                         disabled
                       >
+                        <FontAwesomeIcon icon={faSpinner} spin />
                         Please Wait...
                       </button>
                     ) : (
