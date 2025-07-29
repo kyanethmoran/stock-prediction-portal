@@ -33,6 +33,12 @@ const Login = () => {
         "http://127.0.0.1:8000/api/v1/token/",
         formData
       );
+
+      localStorage.setItem("accessToken", response.data.access);
+      localStorage.setItem("refreshToken", response.data.refresh);
+
+      console.log("login works");
+
       setErrorMsg([]);
       setFormData({
         username: "",
@@ -48,13 +54,10 @@ const Login = () => {
       if (!data || backendErrors.length === 0)
         backendErrors.push("An unexpected error occurred.");
 
-      console.log(data);
-
       setErrorMsg(backendErrors);
     } finally {
       setLoading(false);
       setSubmitted(false);
-      console.log(success);
     }
   };
 
