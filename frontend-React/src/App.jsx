@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import Dashboard from "./components/dashboard/Dashboard";
 
 import AuthProvider from "./AuthProvider";
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           <Footer />
         </BrowserRouter>
