@@ -1,7 +1,12 @@
 import React from "react";
 import machineLearning from "../assets/images/machineLearning.jpg";
 
+import { AuthContext } from "../AuthProvider";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+
 const Main = () => {
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   return (
     <>
       <section className="bg-light py-5">
@@ -16,13 +21,22 @@ const Main = () => {
                 predict market movements, and give you the edge in real-time
                 decision making.
               </p>
-              {/* come back to this for routing */}
-              <a
-                href="/signup"
-                className="btn btn-info btn-lg mt-3 text-white shadow"
-              >
-                Get Started
-              </a>
+
+              {isLoggedIn ? (
+                <Link
+                  className="btn btn-info me-2 text-light"
+                  to={"/dashboard"}
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/signup"
+                  className="btn btn-info btn-lg mt-3 text-white shadow"
+                >
+                  Get Started
+                </Link>
+              )}
             </div>
 
             <div className="col-md-6 text-center">
