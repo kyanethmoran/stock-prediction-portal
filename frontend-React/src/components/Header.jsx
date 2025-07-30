@@ -35,12 +35,17 @@ const Header = () => {
         </Link>
 
         {isLoggedIn ? (
-          <button
-            className="btn btn-outline-light me-2 hover-shadow"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+          <div>
+            <Link className="btn btn-info me-2 text-light" to={"/dashboard"}>
+              Dashboard
+            </Link>
+            <button
+              className="btn btn-outline-light me-2 hover-shadow"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
         ) : (
           <div>
             <Link
@@ -49,7 +54,7 @@ const Header = () => {
             >
               Login
             </Link>
-            <Link to="/signup" className="btn btn-info text-white">
+            <Link to="/signup" className="btn btn-info text-light">
               Sign Up
             </Link>
           </div>
