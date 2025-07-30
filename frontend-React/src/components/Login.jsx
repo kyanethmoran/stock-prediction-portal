@@ -50,7 +50,7 @@ const Login = () => {
       setSuccess(true);
       // come back and route to the dashboard when it is ready
       setIsLoggedIn(true);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setSubmitted(true);
       const backendErrors = [];
