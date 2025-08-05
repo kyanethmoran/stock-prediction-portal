@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
+  useEffect(() => {
+    const fetchProtectedData = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/v1/dashboard"
+        );
+      } catch (error) {
+        console.error("Error fethcing data: ", error);
+      } finally {
+        console.log("try/catch is done");
+      }
+    };
+
+    fetchProtectedData();
+  }, []);
+
   return (
     <>
       <div className="container mt-5">
