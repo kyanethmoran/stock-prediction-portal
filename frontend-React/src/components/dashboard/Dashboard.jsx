@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import axiosInstance from "../../axiosInstance";
 
 const Dashboard = () => {
   const accessToken = localStorage.getItem("accessToken");
