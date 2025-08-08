@@ -7,7 +7,10 @@ const axiosInstance = axios.create({
 
 //Request Interceptor
 axiosInstance.interceptors.request.use(function (config) {
-  console.log("request==>", config);
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    config.headers["Authorization"] = `Bearer ${accessToken}`;
+  }
   return config;
 });
 
