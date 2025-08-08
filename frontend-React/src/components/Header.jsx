@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
