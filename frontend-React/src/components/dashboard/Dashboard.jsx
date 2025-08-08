@@ -7,16 +7,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
-        const response = await axiosInstance.get("/dashboard", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        console.log("success: ", response.data);
+        const response = await axiosInstance.get("/dashboard");
       } catch (error) {
         console.error("Error fetching data: ", error);
-      } finally {
-        console.log("try/catch is done");
       }
     };
 

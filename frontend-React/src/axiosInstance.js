@@ -6,12 +6,17 @@ const axiosInstance = axios.create({
 });
 
 //Request Interceptor
-axiosInstance.interceptors.request.use(function (config) {
-  const accessToken = localStorage.getItem("accessToken");
-  if (accessToken) {
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+axiosInstance.interceptors.request.use(
+  function (config) {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
   }
-  return config;
-});
+);
 
 export default axiosInstance;
