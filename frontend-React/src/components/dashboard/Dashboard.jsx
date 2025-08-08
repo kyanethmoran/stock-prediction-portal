@@ -7,14 +7,11 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/dashboard",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+        const response = await axiosInstance.get("/dashboard", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         console.log("success: ", response.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
