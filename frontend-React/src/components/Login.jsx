@@ -40,8 +40,6 @@ const Login = () => {
       localStorage.setItem("accessToken", response.data.access);
       localStorage.setItem("refreshToken", response.data.refresh);
 
-      console.log("login works");
-
       setErrorMsg([]);
       setFormData({
         username: "",
