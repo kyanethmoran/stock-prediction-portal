@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import About from "./components/About";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import AuthProvider from "./AuthProvider";
@@ -19,6 +20,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/about" element={<About />} />
             <Route
               path="/signup"
               element={
