@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -46,7 +46,6 @@ const Login = () => {
         password: "",
       });
       setSuccess(true);
-      // come back and route to the dashboard when it is ready
       setIsLoggedIn(true);
       navigate("/dashboard");
     } catch (error) {

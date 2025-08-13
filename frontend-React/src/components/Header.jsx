@@ -1,4 +1,3 @@
-import React from "react";
 import logo from "../assets/images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";

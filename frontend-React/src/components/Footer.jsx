@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <footer className="bg-dark text-light pt-4 pb-2 mt-auto">
@@ -26,16 +24,6 @@ const Footer = () => {
               <li>
                 <a href="/about" className="text-light text-decoration-none">
                   About
-                </a>
-              </li>
-              <li>
-                <a href="/pricing" className="text-light text-decoration-none">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="text-light text-decoration-none">
-                  Contact
                 </a>
               </li>
             </ul>

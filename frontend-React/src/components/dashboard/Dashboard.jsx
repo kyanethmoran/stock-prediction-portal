@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
 
 const Dashboard = () => {
