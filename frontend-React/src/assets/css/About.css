@@ -1,0 +1,65 @@
+.about-hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+  border-radius: 1rem;
+}
+
+.about-badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.pill-wrap {
+  flex: 1 1 10.5rem;
+  max-width: 24rem;
+  display: flex;
+}
+
+.about-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 0.9rem;
+
+  width: 100%;
+  max-width: 10.5rem; /* collapsed */
+  opacity: 0.95;
+  cursor: not-allowed; /* looks disabled, but hover still works */
+  white-space: nowrap;
+  overflow: hidden;
+
+  transition: max-width 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.about-pill .pill-name {
+  font-weight: 600;
+}
+
+.about-pill .pill-detail {
+  opacity: 0;
+  transform: translateX(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  font-size: 0.875rem;
+}
+
+/* Expanded on hover/focus (focus included for keyboard users) */
+.about-pill:hover,
+.about-pill:focus {
+  max-width: 24rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+  opacity: 1;
+}
+
+.about-pill:hover .pill-detail,
+.about-pill:focus .pill-detail {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 420px) {
+  .pill-wrap {
+    flex-basis: 100%;
+  }
+}
