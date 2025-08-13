@@ -63,7 +63,6 @@ const Login = () => {
         backendErrors.push("An unexpected error occured.");
       }
 
-      console.log(backendErrors);
       setErrorMsg(backendErrors);
     } finally {
       setLoading(false);

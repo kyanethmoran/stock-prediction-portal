@@ -3,7 +3,6 @@ const Footer = () => {
     <footer className="bg-dark text-light pt-4 pb-2 mt-auto">
       <div className="container">
         <div className="row">
-          {/* About / Logo */}
           <div className="col-md-4 mb-3">
             <h5 className="text-info">Stock+</h5>
             <p className="text-muted">
@@ -38,11 +37,6 @@ const Footer = () => {
           </div>
         </div>
         <hr className="border-secondary" />
-        <p className="text-center text-muted small">
-          Built with ❤️ using <strong>React</strong>,
-          <strong> Bootstrap 5</strong>, <strong>Django</strong>, and
-          <strong> TensorFlow</strong>.
-        </p>
         {/* Disclaimer */}
         <p className="text-center text-warning small mt-2 px-3">
           <strong>Disclaimer:</strong> This website is a portfolio project

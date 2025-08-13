@@ -49,8 +49,6 @@ const SignUp = () => {
         "http://127.0.0.1:8000/api/v1/register/",
         formData
       );
-      console.log("response.data: ", response?.data);
-      console.log("Signup successful");
       setErrorMessage([]); // clear any previous errors
       setSubmitted(false);
       setFormData({
