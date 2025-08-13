@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 
 import AuthProvider from "./AuthProvider";
 import PrivateRoutes from "./PrivateRoutes";
+import PublicRoutes from "./PublicRoutes";
 
 function App() {
   return (
@@ -18,8 +19,22 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/signup"
+              element={
+                <PublicRoutes>
+                  <SignUp />
+                </PublicRoutes>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoutes>
+                  <Login />
+                </PublicRoutes>
+              }
+            />
             <Route
               path="/dashboard"
               element={
