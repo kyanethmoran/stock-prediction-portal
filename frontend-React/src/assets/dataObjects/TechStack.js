@@ -30,6 +30,11 @@ const techStack = [
     detail:
       "Plotting library for static, anitmated, and interactive visualizations in Python.",
   },
+  {
+    name: "Yfinance",
+    detail:
+      "Python library that provides access to market data from Yahoo! Finance.",
+  },
 ];
 
 export default techStack;
