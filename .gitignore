@@ -186,4 +186,9 @@ psd
 thumb
 sketch
 
+# test files 
+call_activity.csv
+LearnPandas.ipynb 
+test.ipynb
+
 # End of https://www.toptal.com/developers/gitignore/api/django,react
