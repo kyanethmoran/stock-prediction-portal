@@ -190,5 +190,6 @@ sketch
 call_activity.csv
 LearnPandas.ipynb 
 test.ipynb
+output.csv
 
 # End of https://www.toptal.com/developers/gitignore/api/django,react
