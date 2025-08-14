@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
 
 const Dashboard = () => {
-  const accessToken = localStorage.getItem("accessToken");
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
