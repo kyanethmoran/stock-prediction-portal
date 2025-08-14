@@ -7,6 +7,29 @@ const techStack = [
   { name: "TensorFlow", detail: "Model inference for predictions." },
   { name: "JWT Auth", detail: "Access/refresh tokens, secure flows." },
   { name: "Axios", detail: "HTTP client with interceptors." },
+  {
+    name: "Pandas",
+    detail: "Library for Data Manipulation and analysis in Python",
+  },
+  {
+    name: "Jupyter Notebook",
+    detail:
+      "Web based interactive computing platform used for visualizations and machine learning.",
+  },
+  {
+    name: "Miniconda",
+    detail: "Package manager and environment manager system.",
+  },
+  {
+    name: "Numpy",
+    detail:
+      "Python package for scientific computing used for working with arrays.",
+  },
+  {
+    name: "Matplotlib",
+    detail:
+      "Plotting library for static, anitmated, and interactive visualizations in Python.",
+  },
 ];
 
 export default techStack;
