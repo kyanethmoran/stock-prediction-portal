@@ -191,5 +191,10 @@ call_activity.csv
 LearnPandas.ipynb 
 test.ipynb
 output.csv
+LearnNumpy.ipynb
+Stock-Prediction.ipynb
+custom_darkmode.mplstyle
+
+.ipynb_checkpoints
 
 # End of https://www.toptal.com/developers/gitignore/api/django,react
