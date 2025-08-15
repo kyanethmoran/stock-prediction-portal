@@ -20,7 +20,7 @@ const Dashboard = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/predict/", {
-        ticker: ticker,
+        ticker: ticker.toUpperCase(),
       });
       console.log("response: ", response.data);
     } catch {
@@ -57,7 +57,7 @@ const Dashboard = () => {
                 type="text"
                 className="form-control"
                 placeholder="Enter Stock Ticker"
-                onChange={(e) => setTicker(e.target.value)}
+                onChange={(e) => setTicker(e.target.value.toUpperCase())}
                 required
               />
               <button type="submit" className="btn btn-info text-light">
