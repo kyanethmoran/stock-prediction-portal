@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "../../axiosInstance";
 
 const Dashboard = () => {
+  const [ticker, setTicker] = useState("");
+
   useEffect(() => {
     const fetchProtectedData = async () => {
       try {
@@ -16,7 +18,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="container mt-5">
+      {/* remove this temp placeholder later */}
+      <div className="container m-5 mx-auto">
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
             <div
@@ -30,6 +33,25 @@ const Dashboard = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 mx-auto">
+            <form className="input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter Stock Ticker"
+                onChange={(e) => setTicker(e.target.value)}
+                required
+              />
+              <button type="submit" className="btn btn-info text-light">
+                See Prediction
+              </button>
+            </form>
           </div>
         </div>
       </div>
