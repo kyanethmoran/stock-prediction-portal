@@ -57,6 +57,7 @@ const Dashboard = () => {
                 type="text"
                 className="form-control"
                 placeholder="Enter Stock Ticker"
+                value={ticker}
                 onChange={(e) => setTicker(e.target.value.toUpperCase())}
                 required
               />
