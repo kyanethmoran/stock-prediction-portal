@@ -38,3 +38,6 @@ const techStack = [
 ];
 
 export default techStack;
+
+//keras
+//scikit Learn python
