@@ -16,6 +16,18 @@ const Dashboard = () => {
     fetchProtectedData();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axiosInstance.post("/predict/", {
+        ticker: ticker,
+      });
+      console.log("response: ", response.data);
+    } catch {
+      console.error("Error: ", error);
+    }
+  };
+
   return (
     <>
       {/* remove this temp placeholder later */}
@@ -40,7 +52,7 @@ const Dashboard = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto">
-            <form className="input-group">
+            <form className="input-group" onSubmit={handleSubmit}>
               <input
                 type="text"
                 className="form-control"
