@@ -6,7 +6,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   const [ticker, setTicker] = useState("");
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -77,7 +77,14 @@ const Dashboard = () => {
                 required
               />
               <button type="submit" className="btn btn-info text-light">
-                See Prediction
+                {loading ? (
+                  <>
+                    <FontAwesomeIcon icon={faSpinner} spin className="me-2" />
+                    Loading...
+                  </>
+                ) : (
+                  "See Prediction"
+                )}
               </button>
             </form>
 
