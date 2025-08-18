@@ -128,10 +128,18 @@ class StockPredictionAPIView(APIView):
             y_predicted = scaler.inverse_transform(y_predicted.reshape(-1,1)).flatten()
             y_test = scaler.inverse_transform(y_test.reshape(-1,1)).flatten()
 
-            print("y predicted: ", y_predicted)
-            print("y test: ", y_test)
             #plot the final prediction
+            plt.switch_backend('AGG')
+            plt.figure(figsize = (15,5 ))
+            plt.plot(y_test, color='grey', linewidth=1, label='Original Price')
+            plt.plot(y_predicted, color='cyan', linewidth=1, label='Predicted Price')
+            plt.title(f'{ticker} Future Prediction')
+            plt.xlabel('Days')
+            plt.ylabel('Price')
+            plt.legend()
 
+            plot_img_path = f'{ticker}_prediction.png'
+            plot_prediction = save_plot(plot_img_path)
 
 
             #send responponse to the frontend
@@ -141,4 +149,5 @@ class StockPredictionAPIView(APIView):
                 'plot_100_dma': plot_100_dma,
                 'plot_200_dma': plot_200_dma,
                 'plot_100_200_dma': plot_100_200_dma,
+                'plot_prediction': plot_prediction
                 })
