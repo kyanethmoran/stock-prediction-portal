@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../../axiosInstance";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const Dashboard = () => {
   const [ticker, setTicker] = useState("");
   const [error, setError] = useState();
