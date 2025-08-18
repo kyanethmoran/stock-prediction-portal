@@ -52,7 +52,6 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* remove this temp placeholder later */}
       <div className="container m-5 mx-auto">
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
@@ -61,10 +60,7 @@ const Dashboard = () => {
               style={{ backgroundColor: "#f4f4f4" }}
             >
               <div className="card-body p-4 text-center">
-                <h2 className="mb-3 text-muted">Welcome to your Dashboard</h2>
-                <p className="text-secondary">
-                  This is a protected page only accessible after login.
-                </p>
+                <h2 className="m-1 text-muted">Welcome to your Dashboard</h2>
               </div>
             </div>
           </div>
@@ -108,7 +104,7 @@ const Dashboard = () => {
 
           {/* display the ticker plots */}
           <div className="prediction mt-1">
-            <div className="p-5">
+            <div className="pt-2">
               {plot && <img src={plot} style={{ maxWidth: "100%" }} />}
             </div>
           </div>
