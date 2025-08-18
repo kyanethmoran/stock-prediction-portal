@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [plot, setPlot] = useState();
   const [ma100, setMa100] = useState();
   const [ma200, setMa200] = useState();
+  const [combinedPlot, setCombinedPlot] = useState();
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -38,9 +39,11 @@ const Dashboard = () => {
       const plotUrl = `${backendRoot}${response.data.plot_img}`;
       const ma100URL = `${backendRoot}${response.data.plot_100_dma}`;
       const ma200URL = `${backendRoot}${response.data.plot_200_dma}`;
+      const ma100_200URL = `${backendRoot}${response.data.plot_100_200_dma}`;
       setPlot(plotUrl);
       setMa100(ma100URL);
       setMa200(ma200URL);
+      setCombinedPlot(ma100_200URL);
 
       if (response.data.error) {
         setError(response.data.error);
@@ -118,6 +121,11 @@ const Dashboard = () => {
             </div>
             <div className="pt-2">
               {ma200 && <img src={ma200} style={{ maxWidth: "100%" }} />}
+            </div>
+            <div className="pt-2">
+              {combinedPlot && (
+                <img src={combinedPlot} style={{ maxWidth: "100%" }} />
+              )}
             </div>
           </div>
         </div>
