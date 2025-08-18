@@ -10,9 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-# to save file
-import os
-from django.conf import settings
+# # to save file
+from .utils import save_plot
 
 
 # Create your views here.
@@ -50,11 +49,18 @@ class StockPredictionAPIView(APIView):
 
             #save basic plot to a file
             plot_img_path = f'{ticker}_plot.png'
-            image_path = os.path.join(settings.MEDIA_ROOT, plot_img_path)
-            plt.savefig(image_path, bbox_inches='tight')
-            plt.close()
-            plot_img = settings.MEDIA_URL + plot_img_path
-            print(plot_img)
+            plot_img = save_plot(plot_img_path)
+
+            # 100 day moving average plot
+            # ma100 = df.Close.rolling(100).mean()
+            # plt.switch_backend('AGG')
+            # plt.figure(figsize = (15,5 ))
+            # plt.plot(df.Close, color='grey', linewidth=1, label='Closing Price')
+            # plt.plot(ma100, color='cyan', linewidth=1, label='100 DMA')
+            # plt.title(f'Closing Price of {ticker} With 100 Day Moving Average')
+            # plt.xlabel('Days')
+            # plt.ylabel('Close Price')
+            # plt.legend()
 
             #send responponse to the frontend
             return Response({
