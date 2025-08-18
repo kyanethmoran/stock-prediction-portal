@@ -8,6 +8,7 @@ const Dashboard = () => {
   const [ticker, setTicker] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [plot, setPlot] = useState();
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -29,6 +30,12 @@ const Dashboard = () => {
         ticker: ticker.toUpperCase(),
       });
       console.log("response: ", response.data);
+
+      // set the plots from the backend
+      const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
+      const plotUrl = `${backendRoot}${response.data.plot_img}`;
+      console.log(plotUrl);
+
       if (response.data.error) {
         setError(response.data.error);
         console.log(error);
