@@ -10,8 +10,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-# # to save file
+# to save file
 from .utils import save_plot
+
+#create scaler object
+from sklearn.preprocessing import MinMaxScaler
+from keras.models import load_model
 
 
 # Create your views here.
@@ -92,6 +96,43 @@ class StockPredictionAPIView(APIView):
 
             plot_img_path = f'{ticker}_100_200_dma.png'
             plot_100_200_dma = save_plot(plot_img_path)
+
+            #splitting data into training and testing datasets
+            data_training = pd.DataFrame(df.Close[0:int(len(df)*0.7)])    #take the first 70% of data to train with
+            data_testing = pd.DataFrame(df.Close[int(len(df)*0.7): int(len(df))])  #compare prediction to last 30%
+
+            #Scaling down the data between 0 and 1
+            scaler = MinMaxScaler(feature_range=(0,1))
+
+            #do not need to train will use the already trained model in resources
+            model = load_model('../backend-DjangoRestFramework/stock_prediction_model.keras')
+
+            #preparing test data
+            past_100_days = data_training.tail(100)
+            final_df = pd.concat([past_100_days, data_testing], ignore_index=True)
+            input_data = scaler.fit_transform(final_df)
+
+            x_test=[]
+            y_test=[]
+
+            for i in range(100, input_data.shape[0]):
+                x_test.append(input_data[i-100:i])
+                y_test.append(input_data[i, 0])
+
+            x_test,y_test = np.array(x_test), np.array(y_test)
+
+            #making predictions
+            y_predicted = model.predict(x_test)
+
+            #revert the scaled prices to original price
+            y_predicted = scaler.inverse_transform(y_predicted.reshape(-1,1)).flatten()
+            y_test = scaler.inverse_transform(y_test.reshape(-1,1)).flatten()
+
+            print("y predicted: ", y_predicted)
+            print("y test: ", y_test)
+            #plot the final prediction
+
+
 
             #send responponse to the frontend
             return Response({
