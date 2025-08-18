@@ -56,4 +56,7 @@ class StockPredictionAPIView(APIView):
             plot_img = settings.MEDIA_URL + plot_img_path
             print(plot_img)
 
-            return Response({'status': 'success', 'ticker': ticker})
+            return Response({
+                'status': 'success',
+                'plot_img': plot_img,
+                })
