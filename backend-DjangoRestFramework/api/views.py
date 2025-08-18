@@ -51,7 +51,7 @@ class StockPredictionAPIView(APIView):
             #save basic plot to a file
             plot_img_path = f'{ticker}_plot.png'
             image_path = os.path.join(settings.MEDIA_ROOT, plot_img_path)
-            plt.savefig(image_path)
+            plt.savefig(image_path, bbox_inches='tight')
             plt.close()
             plot_img = settings.MEDIA_URL + plot_img_path
             print(plot_img)
