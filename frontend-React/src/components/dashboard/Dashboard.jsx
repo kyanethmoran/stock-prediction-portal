@@ -34,7 +34,7 @@ const Dashboard = () => {
       // set the plots from the backend
       const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
       const plotUrl = `${backendRoot}${response.data.plot_img}`;
-      console.log(plotUrl);
+      setPlot(plotUrl);
 
       if (response.data.error) {
         setError(response.data.error);
@@ -104,6 +104,13 @@ const Dashboard = () => {
                 {error}
               </div>
             )}
+          </div>
+
+          {/* display the ticker plots */}
+          <div className="prediction mt-1">
+            <div className="p-5">
+              {plot && <img src={plot} style={{ maxWidth: "100%" }} />}
+            </div>
           </div>
         </div>
       </div>
