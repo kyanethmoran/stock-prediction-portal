@@ -79,10 +79,25 @@ class StockPredictionAPIView(APIView):
             plot_img_path = f'{ticker}_200_dma.png'
             plot_200_dma = save_plot(plot_img_path)
 
+            # 100 and 200 day moving average plot with close price
+            plt.switch_backend('AGG')
+            plt.figure(figsize = (15,5 ))
+            plt.plot(df.Close, color='grey', linewidth=1, label='Closing Price')
+            plt.plot(ma100, color='cyan', linewidth=1, label='100 DMA')
+            plt.plot(ma200, color='yellow', linewidth=1, label='200 DMA')
+            plt.title(f'{ticker} 100 & 200 Day Moving Average')
+            plt.xlabel('Days')
+            plt.ylabel('Close Price')
+            plt.legend()
+
+            plot_img_path = f'{ticker}_100_200_dma.png'
+            plot_100_200_dma = save_plot(plot_img_path)
+
             #send responponse to the frontend
             return Response({
                 'status': 'success',
                 'plot_img': plot_img,
                 'plot_100_dma': plot_100_dma,
                 'plot_200_dma': plot_200_dma,
+                'plot_100_200_dma': plot_100_200_dma,
                 })
