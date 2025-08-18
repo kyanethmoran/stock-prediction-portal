@@ -26,9 +26,13 @@ const Dashboard = () => {
       console.log("response: ", response.data);
       if (response.data.error) {
         setError(response.data.error);
+        console.log(error);
+      } else {
+        setError("");
       }
     } catch {
       console.error("Error: ", error);
+      setError("Unable to fetch prediction. Please check the ticker symbol.");
     }
   };
 
@@ -69,6 +73,12 @@ const Dashboard = () => {
                 See Prediction
               </button>
             </form>
+
+            {error && (
+              <div className="alert alert-danger mt-3" role="alert">
+                {error}
+              </div>
+            )}
           </div>
         </div>
       </div>
