@@ -7,6 +7,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 const Dashboard = () => {
   const [ticker, setTicker] = useState("");
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axiosInstance.post("/predict/", {
         ticker: ticker.toUpperCase(),
@@ -36,6 +38,8 @@ const Dashboard = () => {
     } catch {
       console.error("Error: ", error);
       setError("Unable to fetch prediction. Please check the ticker symbol.");
+    } finally {
+      setLoading(false);
     }
   };
 
