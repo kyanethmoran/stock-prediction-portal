@@ -3,6 +3,7 @@ import axiosInstance from "../../axiosInstance";
 
 const Dashboard = () => {
   const [ticker, setTicker] = useState("");
+  const [error, setError] = useState();
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -23,6 +24,9 @@ const Dashboard = () => {
         ticker: ticker.toUpperCase(),
       });
       console.log("response: ", response.data);
+      if (response.data.error) {
+        setError(response.data.error);
+      }
     } catch {
       console.error("Error: ", error);
     }
