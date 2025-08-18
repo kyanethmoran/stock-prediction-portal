@@ -10,6 +10,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 
+# to save file
+import os
+from django.conf import settings
+
 
 # Create your views here.
 # APIView over generics because we want more control over the custom calculations
@@ -24,10 +28,32 @@ class StockPredictionAPIView(APIView):
             start = datetime(now.year-10, now.month, now.day)
             end = now
             df = yf.download(ticker, start, end)
-            print(df)
 
             if df.empty:
                 return Response({'error': "No data found for the given ticker.",
                                  'status': status.HTTP_404_NOT_FOUND})
+            
+            df = df.reset_index() 
+            print(df)
+
+            # Style Charts
+            plt.style.use('../Resources/custom_darkmode.mplstyle') #style file in resources folder for matplotlib
+
+            # Basic Ticker Close Price Chart
+            plt.switch_backend('AGG')
+            plt.figure(figsize = (15,5 ))
+            plt.plot(df.Close, color='grey', linewidth=1, label='Closing Price')
+            plt.title(f'Closing Price of {ticker}')
+            plt.xlabel('Days')
+            plt.ylabel('Close Price')
+            plt.legend()
+
+            #save basic plot to a file
+            plot_img_path = f'{ticker}_plot.png'
+            image_path = os.path.join(settings.MEDIA_ROOT, plot_img_path)
+            plt.savefig(image_path)
+            plt.close()
+            image_url = settings.MEDIA_URL + plot_img_path
+            print(image_url)
 
             return Response({'status': 'success', 'ticker': ticker})
