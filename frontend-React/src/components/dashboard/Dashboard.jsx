@@ -78,6 +78,7 @@ const Dashboard = () => {
                   if (error) setError("");
                 }}
                 required
+                disabled={loading}
               />
               <button type="submit" className="btn btn-info text-light">
                 {loading ? (
