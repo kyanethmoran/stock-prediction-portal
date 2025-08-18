@@ -73,7 +73,10 @@ const Dashboard = () => {
                 className="form-control"
                 placeholder="Enter Stock Ticker"
                 value={ticker}
-                onChange={(e) => setTicker(e.target.value.toUpperCase())}
+                onChange={(e) => {
+                  setTicker(e.target.value.toUpperCase());
+                  if (error) setError("");
+                }}
                 required
               />
               <button type="submit" className="btn btn-info text-light">
