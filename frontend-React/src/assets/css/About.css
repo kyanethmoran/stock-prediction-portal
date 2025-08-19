@@ -3,63 +3,64 @@
   border-radius: 1rem;
 }
 
-.about-badge {
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
-}
-
-.pill-wrap {
-  flex: 1 1 10.5rem;
-  max-width: 24rem;
-  display: flex;
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  justify-items: center;
 }
 
 .about-pill {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  border: none;
+  justify-content: center;
   border-radius: 999px;
   padding: 0.6rem 0.9rem;
 
   width: 100%;
-  max-width: 10.5rem; /* collapsed */
-  opacity: 0.95;
-  cursor: not-allowed; /* looks disabled, but hover still works */
+  max-width: 15rem;
   white-space: nowrap;
-  overflow: hidden;
+  z-index: 0;
+}
 
-  transition: max-width 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+.about-pill:hover,
+.about-pill:focus-visible {
+  z-index: 2;
 }
 
 .about-pill .pill-name {
   font-weight: 600;
 }
 
-.about-pill .pill-detail {
+/* floating popover */
+.about-pill .pill-pop {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 10px);
+  transform: translate(-50%, 4px);
+
+  width: 12rem;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  padding: 10px;
+  border-radius: 12px;
+  background: #1e1e2f;
+  color: #e4e4e7;
+  border: 2px solid #2b2b45;
+
   opacity: 0;
-  transform: translateX(12px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  font-size: 0.875rem;
+  z-index: 9999; /* make sure the pop over sits on top of everything else */
+  transition: opacity 0.15s ease, transform 0.15s ease,
+    visibility 0s linear 0.15s;
 }
 
-/* Expanded on hover/focus (focus included for keyboard users) */
-.about-pill:hover,
-.about-pill:focus {
-  max-width: 24rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+/* show popover on hover/focus */
+.about-pill:hover .pill-pop,
+.about-pill:focus-visible .pill-pop {
   opacity: 1;
-}
-
-.about-pill:hover .pill-detail,
-.about-pill:focus .pill-detail {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@media (max-width: 420px) {
-  .pill-wrap {
-    flex-basis: 100%;
-  }
+  transform: translate(-50%, 0);
+  transition-delay: 0s;
 }
