@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [ma200, setMa200] = useState();
   const [combinedPlot, setCombinedPlot] = useState();
   const [testPlot, setTestPlot] = useState();
+  const [datedPlot, setDatedPlot] = useState();
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -43,11 +44,13 @@ const Dashboard = () => {
       const ma200URL = `${backendRoot}${response.data.plot_200_dma}`;
       const ma100_200URL = `${backendRoot}${response.data.plot_100_200_dma}`;
       const testPlotURL = `${backendRoot}${response.data.plot_test_prediction}`;
+      const datedPlotURL = `${backendRoot}${response.data.tesing_dated_plot}`;
       setPlot(plotUrl);
       setMa100(ma100URL);
       setMa200(ma200URL);
       setCombinedPlot(ma100_200URL);
       setTestPlot(testPlotURL);
+      setDatedPlot(datedPlotURL);
 
       if (response.data.error) {
         setError(response.data.error);
@@ -69,6 +72,7 @@ const Dashboard = () => {
     { src: ma200, alt: "200-day moving average" },
     { src: combinedPlot, alt: "100/200-day combined plot" },
     { src: testPlot, alt: "Model test vs. actual plot" },
+    { src: datedPlot, alt: "testing dates on x-axis" },
   ];
 
   return (

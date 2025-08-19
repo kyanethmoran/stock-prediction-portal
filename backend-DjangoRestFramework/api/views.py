@@ -10,6 +10,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 
+#get matplotlib chart to show dates on x-axis
+import matplotlib.dates as mdates
+
 # to save file
 from .utils import save_plot
 
@@ -41,6 +44,28 @@ class StockPredictionAPIView(APIView):
 
             # Style Charts
             plt.style.use('../Resources/custom_darkmode.mplstyle') #style file in resources folder for matplotlib
+
+            # try to get a chart with dates for x-axis
+            plt.switch_backend('AGG')
+            fig, ax= plt.subplots(figsize=(15,5))
+
+            ax.plot(df['Date'], df['Close'], color='grey', linewidth=1, label='Closing Price')
+
+            # Format x-axis to show Month + Year
+            ax.xaxis.set_major_locator(mdates.MonthLocator(interval=6))          # tick every 3 months (adjust as needed)
+            ax.xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))          # format like "Jan 2025"
+            plt.setp(ax.get_xticklabels(), rotation=45, ha='right')              # rotate labels for readability
+
+            # Labels and title
+            ax.set_title(f'Closing Price of {ticker}')
+            ax.set_xlabel('Date')
+            ax.set_ylabel('Close Price')
+            ax.legend()
+            ax.grid(True, which='both', alpha=0.3)
+
+            # save basic plot to a file
+            plot_img_path = f'{ticker}testing_dated_plot.png'
+            testing_dated_plot = save_plot(plot_img_path)
 
             # Basic Ticker Close Price Chart
             plt.switch_backend('AGG')
@@ -149,5 +174,6 @@ class StockPredictionAPIView(APIView):
                 'plot_100_dma': plot_100_dma,
                 'plot_200_dma': plot_200_dma,
                 'plot_100_200_dma': plot_100_200_dma,
-                'plot_test_prediction': plot_test_prediction
+                'plot_test_prediction': plot_test_prediction,
+                'tesing_dated_plot': testing_dated_plot,
                 })
