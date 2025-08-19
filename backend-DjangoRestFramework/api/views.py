@@ -109,8 +109,8 @@ class StockPredictionAPIView(APIView):
 
             #preparing test data
             past_100_days = data_training.tail(100)
-            final_df = pd.concat([past_100_days, data_testing], ignore_index=True)
-            input_data = scaler.fit_transform(final_df)
+            test_df = pd.concat([past_100_days, data_testing], ignore_index=True)
+            input_data = scaler.fit_transform(test_df)
 
             x_test=[]
             y_test=[]
@@ -132,14 +132,14 @@ class StockPredictionAPIView(APIView):
             plt.switch_backend('AGG')
             plt.figure(figsize = (15,5 ))
             plt.plot(y_test, color='grey', linewidth=1, label='Original Price')
-            plt.plot(y_predicted, color='cyan', linewidth=1, label='Predicted Price')
-            plt.title(f'{ticker} Future Prediction')
+            plt.plot(y_predicted, color='cyan', linewidth=1, label='Predicted Testing Price')
+            plt.title(f'{ticker} Test Prediction')
             plt.xlabel('Days')
             plt.ylabel('Price')
             plt.legend()
 
-            plot_img_path = f'{ticker}_prediction.png'
-            plot_prediction = save_plot(plot_img_path)
+            plot_img_path = f'{ticker}test_prediction.png'
+            plot_test_prediction = save_plot(plot_img_path)
 
 
             #send responponse to the frontend
@@ -149,5 +149,5 @@ class StockPredictionAPIView(APIView):
                 'plot_100_dma': plot_100_dma,
                 'plot_200_dma': plot_200_dma,
                 'plot_100_200_dma': plot_100_200_dma,
-                'plot_prediction': plot_prediction
+                'plot_test_prediction': plot_test_prediction
                 })
