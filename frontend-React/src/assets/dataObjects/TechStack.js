@@ -35,9 +35,15 @@ const techStack = [
     detail:
       "Python library that provides access to market data from Yahoo! Finance.",
   },
+  {
+    name: "Keras",
+    detail: "Interface for building and training deep learning models",
+  },
+  {
+    name: "Scikit Learn",
+    detail:
+      " Preprocessing module for preparing data for machine learning models",
+  },
 ];
 
 export default techStack;
-
-//keras
-//scikit Learn python
