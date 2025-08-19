@@ -4,6 +4,8 @@ import axiosInstance from "../../axiosInstance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
+import ChartExplanation from "./ChartExplanation";
+
 const Dashboard = () => {
   const [ticker, setTicker] = useState("");
   const [error, setError] = useState("");
@@ -12,6 +14,7 @@ const Dashboard = () => {
   const [ma100, setMa100] = useState();
   const [ma200, setMa200] = useState();
   const [combinedPlot, setCombinedPlot] = useState();
+  const [testPlot, setTestPlot] = useState();
 
   useEffect(() => {
     const fetchProtectedData = async () => {
@@ -32,7 +35,6 @@ const Dashboard = () => {
       const response = await axiosInstance.post("/predict/", {
         ticker: ticker.toUpperCase(),
       });
-      console.log("response: ", response.data);
 
       // set the plots from the backend
       const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
@@ -40,10 +42,12 @@ const Dashboard = () => {
       const ma100URL = `${backendRoot}${response.data.plot_100_dma}`;
       const ma200URL = `${backendRoot}${response.data.plot_200_dma}`;
       const ma100_200URL = `${backendRoot}${response.data.plot_100_200_dma}`;
+      const testPlotURL = `${backendRoot}${response.data.plot_test_prediction}`;
       setPlot(plotUrl);
       setMa100(ma100URL);
       setMa200(ma200URL);
       setCombinedPlot(ma100_200URL);
+      setTestPlot(testPlotURL);
 
       if (response.data.error) {
         setError(response.data.error);
@@ -51,7 +55,7 @@ const Dashboard = () => {
       } else {
         setError("");
       }
-    } catch {
+    } catch (error) {
       console.error("Error: ", error);
       setError("Unable to fetch prediction. Please check the ticker symbol.");
     } finally {
@@ -59,23 +63,16 @@ const Dashboard = () => {
     }
   };
 
+  const plotItems = [
+    // { src: plot, alt: "Close price plot" },
+    { src: ma100, alt: "100-day moving average" },
+    { src: ma200, alt: "200-day moving average" },
+    { src: combinedPlot, alt: "100/200-day combined plot" },
+    { src: testPlot, alt: "Model test vs. actual plot" },
+  ];
+
   return (
     <>
-      <div className="container m-5 mx-auto">
-        <div className="row justify-content-center">
-          <div className="col-md-8 col-lg-6">
-            <div
-              className="card shadow-lg rounded-4 border-0"
-              style={{ backgroundColor: "#f4f4f4" }}
-            >
-              <div className="card-body p-4 text-center">
-                <h2 className="m-1 text-muted">Welcome to your Dashboard</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container">
         <div className="row">
           <div className="col-md-6 mx-auto">
@@ -111,22 +108,21 @@ const Dashboard = () => {
             )}
           </div>
 
+          <ChartExplanation />
+
           {/* display the ticker plots */}
           <div className="prediction mt-1">
-            <div className="pt-2">
-              {plot && <img src={plot} style={{ maxWidth: "100%" }} />}
-            </div>
-            <div className="pt-2">
-              {ma100 && <img src={ma100} style={{ maxWidth: "100%" }} />}
-            </div>
-            <div className="pt-2">
-              {ma200 && <img src={ma200} style={{ maxWidth: "100%" }} />}
-            </div>
-            <div className="pt-2">
-              {combinedPlot && (
-                <img src={combinedPlot} style={{ maxWidth: "100%" }} />
-              )}
-            </div>
+            {plotItems.map((img, i) =>
+              img.src ? (
+                <div className="pt-2" key={i}>
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    style={{ maxWidth: "100%" }}
+                  />
+                </div>
+              ) : null
+            )}
           </div>
         </div>
       </div>
